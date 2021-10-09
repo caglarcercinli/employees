@@ -13,6 +13,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication()
                 .withUser("caglar")
                 .password("{noop}caglar")
+                .authorities("admin")
+                .and()
+                .withUser("user")
+                .password("{noop}user")
                 .authorities("admin");
     }
 
@@ -30,7 +34,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests(requests -> requests
                 .mvcMatchers("/", "/login").permitAll()
                 .mvcMatchers("/**").authenticated());
-//                .mvcMatchers("/employees/**")
-//                .hasAuthority("admin"));
-        http.logout(logout -> logout.logoutSuccessUrl("/"));    }
+        http.logout(logout -> logout.logoutSuccessUrl("/"));
+    }
 }
