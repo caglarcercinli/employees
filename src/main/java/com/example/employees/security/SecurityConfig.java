@@ -28,8 +28,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin();
         http.authorizeRequests(requests -> requests
-                .mvcMatchers("/employees/**")
-                .hasAuthority("admin"));
-
-    }
+                .mvcMatchers("/", "/login").permitAll()
+                .mvcMatchers("/**").authenticated());
+//                .mvcMatchers("/employees/**")
+//                .hasAuthority("admin"));
+        http.logout(logout -> logout.logoutSuccessUrl("/"));    }
 }
