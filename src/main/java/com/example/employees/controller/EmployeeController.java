@@ -19,19 +19,19 @@ public class EmployeeController {
     }
 
     @GetMapping
-    public ModelAndView index(){
-          var employee = new ModelAndView("employee","employees",employeeService.findAll());
-          employee.addObject("candidate",new Employee("","","",""));
-        return employee;
+    public ModelAndView employee(){
+//          var employee = new ModelAndView("employee","employees",employeeService.findAll());
+//          employee.addObject("candidate",new Employee("","","",""));
+        return new ModelAndView("employee","employees",employeeService.findAll());
     }
-    @PostMapping
-    public ModelAndView add(Employee employee, Errors errors){
-        if (errors.hasErrors()) {
-            return new ModelAndView("employee");
-        }
-        employeeService.create(employee);
-        var emp = new ModelAndView("employee","employees",employeeService.findAll());
-        emp.addObject("candidate",new Employee("","","",""));
-        return emp;
-    }
+//    @PostMapping
+//    public ModelAndView add(Employee employee, Errors errors){
+//        if (errors.hasErrors()) {
+//            return new ModelAndView("employee");
+//        }
+//        employeeService.create(employee);
+//        var emp = new ModelAndView("employee","employees",employeeService.findAll());
+//        emp.addObject("candidate",new Employee("","","",""));
+//        return emp;
+//    }
 }

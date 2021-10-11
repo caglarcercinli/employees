@@ -6,18 +6,32 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+import javax.sql.DataSource;
+
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    private final DataSource dataSource;
+
+    public SecurityConfig(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("caglar")
-                .password("{noop}caglar")
-                .authorities("admin")
-                .and()
-                .withUser("user")
-                .password("{noop}user")
-                .authorities("admin");
+        auth.jdbcAuthentication().dataSource(dataSource)
+               .usersByUsernameQuery("select email as username," +
+             "employees.password as password, actief as enabled from employees where email = ?")
+                .authoritiesByUsernameQuery("select employees.email as username," +
+                        "'admin' as authorities from employees where employees.email=?");
+                //
+        //        auth.inMemoryAuthentication()
+//                .withUser("caglar")
+//                .password("{noop}caglar")
+//                .authorities("admin")
+//                .and()
+//                .withUser("user")
+//                .password("{noop}user")
+//                .authorities("admin");
     }
 
     @Override

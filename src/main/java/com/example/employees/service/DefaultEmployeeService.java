@@ -5,6 +5,7 @@ import com.example.employees.domain.Employee;
 import com.example.employees.exception.EmployeeNietGevondenException;
 import com.example.employees.repository.EmployeeRepository;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -15,9 +16,11 @@ import java.util.Optional;
 @Transactional
 public class DefaultEmployeeService implements EmployeeService {
     private final EmployeeRepository employeeRepository;
+//    private final PasswordEncoder passwordEncoder;
 
-    public DefaultEmployeeService(EmployeeRepository employeeRepository) {
+    public DefaultEmployeeService(EmployeeRepository employeeRepository/*, PasswordEncoder passwordEncoder*/) {
         this.employeeRepository = employeeRepository;
+       // this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -34,6 +37,7 @@ public class DefaultEmployeeService implements EmployeeService {
 
     @Override
     public void create(Employee employee) {
+//        employee.setPassword(passwordEncoder.encode(employee.getPassword()));
         employeeRepository.save(employee);
     }
 

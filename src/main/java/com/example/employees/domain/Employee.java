@@ -52,6 +52,10 @@ public class Employee {
         return password;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public Employee withId(long id) {
         var employeeMetId = new Employee(firstName, lastName, email, password);
         employeeMetId.id = id;
