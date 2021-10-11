@@ -40,6 +40,7 @@ public class DefaultEmployeeService implements EmployeeService {
     @Override
     public void create(Employee employee) {
         employee.setPassword(passwordEncoder.encode(employee.getPassword()));
+        System.out.println(employee.getPassword());
         employeeRepository.save(employee);
     }
 
