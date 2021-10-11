@@ -14,7 +14,7 @@
     <tr>
         <th>Id</th>
         <th>First name</th>
-<!--        <th>Last name</th>-->
+        <th>Last name</th>
 <!--        <th>email</th>-->
     </tr>
     </thead>
@@ -22,7 +22,7 @@
     <tr th:each="employee:${employees}" th:object="${employee}">
         <td th:text="*{id}"></td>
         <td th:text="*{firstName}"></td>
-<!--        <td th:text="*{lastName}"></td>-->
+        <td th:text="*{lastName}"></td>
 <!--        <td th:text="*{email}"></td>-->
     </tr>
     </tbody>
